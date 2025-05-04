@@ -835,6 +835,11 @@ module.exports = grammar({
           ),
         ),
         optional($.from),
+        optional($.where),
+        optional($.group_by),
+        optional($.window_clause),
+        optional($.order_by),
+        optional($.limit),
       ),
     ),
 
@@ -3131,11 +3136,6 @@ module.exports = grammar({
           $.lateral_cross_join,
         ),
       ),
-      optional($.where),
-      optional($.group_by),
-      optional($.window_clause),
-      optional($.order_by),
-      optional($.limit),
     ),
 
     relation: $ => prec.right(
