@@ -12,3 +12,13 @@ package-lock.json
 /src/tree_sitter/
 /src/parser.c
 /src/*.json
+
+# Grammar volatiles
+*.wasm
+*.obj
+*.o
+
+# Archives
+*.tar.gz
+*.tgz
+*.zip
