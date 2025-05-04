@@ -1,33 +1,54 @@
-name: Deploy GitHub Pages
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
 on:
-  push:
-    branches:
-      - main
+  # Runs on pushes targeting the default branch
+  release:
+    types: [published]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "github-pages"
+  cancel-in-progress: true
 
 jobs:
-  jekyll:
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Use Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 20.x
+          registry-url: 'https://registry.npmjs.org'
+      - uses: mymindstorm/setup-emsdk@v14
+      - name: Verify
+        run: emcc -v
       - run: npm install
-      - name: Publish parser on GitHub Pages
-        run: cp -r LICENSE CMakeLists.txt Cargo.toml src queries bindings Package.swift docs
-      - uses: ruby/setup-ruby@v1
+      - run: npm run prestart
+      - run: bash .github/script/playground.sh
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          ruby-version: 3.2.0
-      - uses: limjh16/jekyll-action-ts@v2
-        env:
-          NODE_ENV: "production"
-        with:
-          enable_cache: true
-      - name: 🚀 deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
-          publish_branch: gh-pages
+          # Upload entire repository
+          path: 'playground'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
