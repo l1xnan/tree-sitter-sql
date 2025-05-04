@@ -1,5 +1,5 @@
 {
-  "name": "@derekstride/tree-sitter-sql",
+  "name": "@l1xnan/tree-sitter-sql",
   "version": "0.3.8",
   "description": "Tree-sitter Grammar for SQL",
   "main": "bindings/node",
@@ -16,17 +16,16 @@
   "author": "derek stride",
   "license": "MIT",
   "dependencies": {
-    "node-addon-api": "^7.1.0",
-    "node-gyp-build": "^4.8.0"
+    "node-addon-api": "^8.2.1",
+    "node-gyp-build": "^4.8.4"
   },
   "devDependencies": {
     "commit-and-tag-version": "^12.0.0",
-    "node-gyp": "^10.0.1",
     "prebuildify": "^6.0.0",
     "tree-sitter-cli": "^0.25.3"
   },
   "peerDependencies": {
-    "tree-sitter": "^0.21.0"
+    "tree-sitter": "^0.22.4"
   },
   "peerDependenciesMeta": {
     "tree_sitter": {
@@ -56,10 +55,12 @@
   ],
   "files": [
     "grammar.js",
+    "tree-sitter.json",
     "binding.gyp",
     "prebuilds/**",
     "bindings/node/*",
     "queries/*",
-    "src/**"
+    "src/**",
+    "*.wasm"
   ]
 }
