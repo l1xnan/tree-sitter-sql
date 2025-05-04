@@ -63,5 +63,8 @@
     "queries/*",
     "src/**",
     "*.wasm"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
