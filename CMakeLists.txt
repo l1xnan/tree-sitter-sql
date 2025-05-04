@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
 project(tree-sitter-sql
-        VERSION "0.4.0"
+        VERSION "0.4.1"
         DESCRIPTION "Tree-sitter Grammar for SQL"
         HOMEPAGE_URL "git+https://github.com/derekstride/tree-sitter-sql.git"
         LANGUAGES C)
