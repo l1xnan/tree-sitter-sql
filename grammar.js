@@ -921,10 +921,10 @@ module.exports = grammar({
 
     select: $ => seq(
       $.keyword_select,
-      seq(
+      optional(seq(
         optional($.keyword_distinct),
         $.select_expression,
-      ),
+      )),
     ),
 
     select_expression: $ => seq(
