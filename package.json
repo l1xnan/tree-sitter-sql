@@ -6,7 +6,7 @@
   "types": "bindings/node",
   "scripts": {
     "generate": "tree-sitter generate",
-    "install": "node-gyp-build",
+    "install": "tree-sitter generate && node-gyp-build",
     "prestart": "tree-sitter build --wasm",
     "start": "tree-sitter playground",
     "release": "commit-and-tag-version",
