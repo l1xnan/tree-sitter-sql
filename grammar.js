@@ -3186,34 +3186,34 @@ module.exports = grammar({
       ),
     ),
 
-    join: $ => seq(
-      optional($.keyword_natural),
-      optional(
-        choice(
-          $.keyword_left,
-          seq($.keyword_full, $.keyword_outer),
-          seq($.keyword_left, $.keyword_outer),
-          $.keyword_right,
-          seq($.keyword_right, $.keyword_outer),
-          $.keyword_inner,
-          $.keyword_full,
-        ),
-      ),
-      $.keyword_join,
-      $.relation,
-      optional($.index_hint),
-      optional($.join),
-      choice(
+    join: $ =>
+      prec.left(
+        'clause_connective',
         seq(
-          $.keyword_on,
-          field("predicate", $._expression),
-        ),
-        seq(
-          $.keyword_using,
-          alias($._column_list, $.list),
+          optional($.keyword_natural),
+          optional(
+            choice(
+              $.keyword_left,
+              seq($.keyword_full, $.keyword_outer),
+              seq($.keyword_left, $.keyword_outer),
+              $.keyword_right,
+              seq($.keyword_right, $.keyword_outer),
+              $.keyword_inner,
+              $.keyword_full,
+            ),
+          ),
+          $.keyword_join,
+          $.relation,
+          optional($.index_hint),
+          optional($.join),
+          optional($.join_condition),
         )
-      )
-    ),
+      ),
+    join_condition: ($) =>
+      choice(
+        seq($.keyword_on, field("predicate", $._expression)),
+        seq($.keyword_using, alias($._column_list, $.list)),
+      ),
 
     cross_join: $ => prec.right(
       seq(
