@@ -2,7 +2,7 @@
 
 set -eEu
 
-timeout 30s npm run start &
+timeout 60s npm run start &
 job=$!
 
 while ! nc -z localhost 8000; do
