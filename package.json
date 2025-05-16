@@ -6,7 +6,7 @@
   "types": "bindings/node",
   "scripts": {
     "generate": "tree-sitter generate",
-    "install": "tree-sitter generate && node-gyp-build",
+    "install": "node-gyp-build",
     "prestart": "tree-sitter build --wasm",
     "start": "npx --yes --package=tree-sitter-cli@v0.25.3 -- tree-sitter playground",
     "playground": "npm run install && npm run prestart && npm run start",
