@@ -3144,6 +3144,10 @@ module.exports = grammar({
           $.subquery,
           $.invocation,
           $.object_reference,
+          field('table_path', alias(
+            $._single_quote_string,
+            $.literal
+          )),
           wrapped_in_parenthesis($.values),
         ),
         optional(
