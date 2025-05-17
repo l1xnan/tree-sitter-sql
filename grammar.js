@@ -2246,6 +2246,13 @@ module.exports = grammar({
       field('name', $.identifier),
     ),
 
+    table_path: $ => choice(
+      field('path', alias(
+        $._single_quote_string,
+        $.identifier
+      )),
+    ),
+
     _copy_statement: $ => seq(
       $.keyword_copy,
       $.object_reference,
@@ -3144,10 +3151,7 @@ module.exports = grammar({
           $.subquery,
           $.invocation,
           $.object_reference,
-          field('table_path', alias(
-            $._single_quote_string,
-            $.literal
-          )),
+          $.table_path,
           wrapped_in_parenthesis($.values),
         ),
         optional(
