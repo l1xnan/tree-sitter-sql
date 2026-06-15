@@ -28,5 +28,3 @@ jobs:
       - run: npx --yes --package=tree-sitter-cli@v0.26.9 -- tree-sitter generate
       - run: npx --yes --package=tree-sitter-cli@v0.26.9 -- tree-sitter build --wasm
       - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
