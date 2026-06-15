@@ -1,6 +1,6 @@
 {
   "name": "@l1xnan/tree-sitter-sql",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "description": "Tree-sitter Grammar for SQL",
   "main": "bindings/node",
   "types": "bindings/node",
