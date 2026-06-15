@@ -19,10 +19,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: '24'
           registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false  # never use caching in release builds
       - run: npm install
       - run: npx --yes --package=tree-sitter-cli@v0.26.9 -- tree-sitter generate
       - run: npx --yes --package=tree-sitter-cli@v0.26.9 -- tree-sitter build --wasm
